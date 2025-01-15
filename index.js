@@ -51,3 +51,18 @@ function render() {
 render();
 
 // TODO: Add sheep to the starting bank when the form is submitted
+const form = document.querySelector('form');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  
+  // Value of number of sheep user entered in textbox
+  const number = document.querySelector("#numSheep");
+  // console.log(number.value);
+
+  for (let i=0; i<number.value; i++) {
+    state.start.push("sheep");
+  }
+
+  // Render after updating start sheep array
+  render();
+});
