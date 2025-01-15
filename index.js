@@ -31,7 +31,14 @@ function renderStartSheep() {
 
 /** Renders sheep on the target bank */
 function renderTargetSheep() {
-  // TODO
+  const targetElements = state.target.map((sheep) => {
+    const targetElement = document.createElement('li');
+    targetElement.textContent = "🐑";
+    return targetElement;
+  })
+
+  const targetBank = document.querySelector('#targetBank ul');
+  targetBank.replaceChildren(...targetElements);
 }
 
 function render() {
