@@ -1,14 +1,21 @@
 // === State ===
 const state = {
   start: ["sheep"],
+  river: [],
   target: [],
 };
 
 const maxSheep = 10;
 
-/** Moves a sheep from start to target */
-function moveSheep() {
+/** Moves a sheep from start to river */
+function moveSheepStartToRiver() {
   const sheep = state.start.pop();
+  state.river.push(sheep);
+}
+
+/** Moves a sheep from river to target */
+function moveSheepRiverToTarget() {
+  const sheep = state.river.pop();
   state.target.push(sheep);
 }
 
@@ -24,7 +31,7 @@ function renderStartSheep() {
     li.append(button);
 
     button.addEventListener('click', () => {
-      moveSheep();
+      moveSheepStartToRiver();
       render();
     })
     return li;
@@ -32,6 +39,31 @@ function renderStartSheep() {
 
   const startingBank = document.querySelector("#startingBank ul");
   startingBank.replaceChildren(...startingSheep);
+}
+/** Renders sheep on the river */
+function renderRiverSheep() {
+  const riverElements = state.river.map((sheep) => {
+    const riverElement = document.createElement('li');
+
+    const button = document.createElement('button');
+    button.textContent = "🐑";
+    
+    riverElement.append(button);
+
+    button.addEventListener('click', () => {
+      moveSheepRiverToTarget();
+      render();
+    });
+    
+    return riverElement;
+  })
+
+  const riverContent = document.querySelector('section.river ul');
+  riverContent.replaceChildren(...riverElements);
+
+    // Display text for how many sheep are in the river
+    const riverSheepText = document.querySelector('#totalRiverSheep');
+    riverSheepText.textContent = `The total amount of sheep moved to the river is ${state.river.length}.`
 }
 
 /** Renders sheep on the target bank */
@@ -52,6 +84,7 @@ function renderTargetSheep() {
 
 function render() {
   renderStartSheep();
+  renderRiverSheep();
   renderTargetSheep();
 }
 
