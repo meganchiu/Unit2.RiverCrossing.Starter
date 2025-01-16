@@ -4,6 +4,8 @@ const state = {
   target: [],
 };
 
+const maxSheep = 10;
+
 /** Moves a sheep from start to target */
 function moveSheep() {
   const sheep = state.start.pop();
@@ -65,6 +67,16 @@ form.addEventListener('submit', event => {
   for (let i=0; i<number.value; i++) {
     state.start.push("sheep");
   }
+
+  console.log(`The amount of sheep in the start state BEFORE maxSheep is enforced is ${state.start.length}`)
+
+  if (state.start.length > maxSheep) {
+    let diff = state.start.length - maxSheep;
+    for (let i=0; i<diff; i++) {
+      state.start.pop();
+    }
+  }
+  console.log(`The amount of sheep in the start state AFTER maxSheep is enforced is ${state.start.length}`)
 
   // Render after updating start sheep array
   render();
