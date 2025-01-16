@@ -45,6 +45,7 @@ function renderTargetSheep() {
   const targetBank = document.querySelector('#targetBank ul');
   targetBank.replaceChildren(...targetElements);
 
+  // Display text for how many sheep are in the target bank
   const targetSheepText = document.querySelector('#totalTargetSheep');
   targetSheepText.textContent = `The total amount of sheep moved to the target bank is ${state.target.length}.`
 }
@@ -71,8 +72,8 @@ form.addEventListener('submit', event => {
     state.start.push("sheep");
   }
 
+  // Functionality for enforcing maxSheep
   console.log(`The amount of sheep in the start state BEFORE maxSheep is enforced is ${state.start.length}`)
-
   if (state.start.length > maxSheep) {
     alert(`The max number of sheep allowed in the starting bank is ${maxSheep}!`);
     let diff = state.start.length - maxSheep;
@@ -80,7 +81,6 @@ form.addEventListener('submit', event => {
       state.start.pop();
     }
   }
-
   console.log(`The amount of sheep in the start state AFTER maxSheep is enforced is ${state.start.length}`)
 
   // Render after updating start sheep array
