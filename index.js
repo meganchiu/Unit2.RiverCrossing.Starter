@@ -6,7 +6,8 @@ const state = {
 
 /** Moves a sheep from start to target */
 function moveSheep() {
-  // TODO
+  const sheep = state.start.pop();
+  state.target.push(sheep);
 }
 
 // === Render ===
@@ -20,8 +21,10 @@ function renderStartSheep() {
     button.textContent = "🐑";
     li.append(button);
 
-    // TODO: Add event listener so the sheep moves when clicked
-
+    button.addEventListener('click', () => {
+      moveSheep();
+      render();
+    })
     return li;
   });
 
