@@ -61,9 +61,9 @@ function renderRiverSheep() {
   const riverContent = document.querySelector('section.river ul');
   riverContent.replaceChildren(...riverElements);
 
-    // Display text for how many sheep are in the river
-    const riverSheepText = document.querySelector('#totalRiverSheep');
-    riverSheepText.textContent = `The total amount of sheep moved to the river is ${state.river.length}.`
+  // Display text for how many sheep are in the river
+  const riverSheepText = document.querySelector('#totalRiverSheep');
+  riverSheepText.textContent = `The total amount of sheep moved to the river is ${state.river.length}.`
 }
 
 /** Renders sheep on the target bank */
@@ -80,6 +80,12 @@ function renderTargetSheep() {
   // Display text for how many sheep are in the target bank
   const targetSheepText = document.querySelector('#totalTargetSheep');
   targetSheepText.textContent = `The total amount of sheep moved to the target bank is ${state.target.length}.`
+
+  // Display message once all sheep have been moved to target bank
+  if ((state.start.length == 0) && (state.river.length == 0) && (state.target.length > 0)) {
+    const successTxt = document.querySelector('#successMessage');
+    successTxt.textContent = 'Congratulations! All the sheep have been moved to the target bank.';
+  }
 }
 
 function render() {
